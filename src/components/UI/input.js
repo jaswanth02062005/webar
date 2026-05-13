@@ -1,28 +1,40 @@
+import { useState } from "react";
+
 export default function Input({ onUrlSubmit }) {
+  const [isSyncing, setIsSyncing] = useState(false);
+
   return (
     <form
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
-        onUrlSubmit(e.target.elements.url.value);
+        setIsSyncing(true);
+        await onUrlSubmit(e.target.elements.url.value);
+        setIsSyncing(false);
       }}
-      className="flex w-full gap-2 bg-white/5 p-2 rounded-[2rem] backdrop-blur-3xl border border-white/10 shadow-2xl transition-all hover:border-white/20 group focus-within:border-white/30"
+      className="flex w-full max-w-lg gap-2 bg-black/40 p-1.5 rounded-full backdrop-blur-xl border border-white/10 transition-all focus-within:border-white/30 shadow-2xl"
     >
       <div className="flex-1 flex items-center px-4">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="text-zinc-500 mr-3" viewBox="0 0 256 256"><path d="M168,152a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,152Zm-8-40H96a8,8,0,0,0,0,16h64a8,8,0,0,0,0-16Zm72-24V200a16,16,0,0,1-16,16H40a16,16,0,0,1-16-16V40A16,16,0,0,1,40,24H168a8,8,0,0,1,5.66,2.34l56,56A8,8,0,0,1,232,88Zm-16,4H176V40H40V200H216Zm-40-56v32h32Z"></path></svg>
         <input
           type="url"
           name="url"
-          placeholder="New product link..."
+          placeholder="Paste product link..."
           required
-          className="flex-1 bg-transparent py-3 text-white placeholder-zinc-600 outline-none focus:ring-0 font-medium text-sm"
+          className="flex-1 bg-transparent py-2 text-white placeholder-zinc-500 outline-none focus:ring-0 font-medium text-xs tracking-tight"
         />
       </div>
       <button
         type="submit"
-        className="bg-white text-black px-8 py-3 rounded-[1.5rem] font-black uppercase tracking-widest text-[10px] hover:bg-zinc-200 transition-all active:scale-95 shadow-xl"
+        disabled={isSyncing}
+        className="bg-white text-black px-6 py-2 rounded-full font-black uppercase tracking-widest text-[9px] hover:bg-zinc-200 transition-all active:scale-95 disabled:opacity-50 flex items-center gap-2"
       >
-        Update Fit
+        {isSyncing && (
+          <div className="w-2 h-2 border-[1px] border-black/20 border-t-black rounded-full animate-spin"></div>
+        )}
+        {isSyncing ? "Syncing" : "Sync"}
       </button>
     </form>
   );
 }
+
+
+

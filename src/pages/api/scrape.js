@@ -56,15 +56,25 @@ export default async function handler(req, res) {
 
     // 3. Find large images in the body
     $("img").each((_, el) => {
-      const src = $(el).attr("src") || $(el).attr("data-src");
+      const src = $(el).attr("src") || $(el).attr("data-src") || $(el).attr("data-original");
       const alt = $(el).attr("alt") || "";
-      if (src && (alt.toLowerCase().includes("product") || alt.toLowerCase().includes("model") || alt.toLowerCase().includes("front"))) {
+      const className = $(el).attr("class") || "";
+      const id = $(el).attr("id") || "";
+      
+      const isLikelyProduct = 
+        alt.toLowerCase().includes("product") || 
+        alt.toLowerCase().includes("model") || 
+        className.toLowerCase().includes("product") ||
+        id.toLowerCase().includes("product") ||
+        id.toLowerCase().includes("main-image");
+
+      if (src && isLikelyProduct) {
         images.push(src);
       }
     });
 
     // Heuristic: Pick the first "likely" product image
-    imageUrl = images.find(img => img.startsWith("http")) || images[0];
+    imageUrl = images.find(img => img && img.startsWith("http")) || images[0];
 
     // Handle relative URLs
     if (imageUrl && imageUrl.startsWith("/")) {

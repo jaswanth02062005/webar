@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 export function usePose(videoRef) {
   const landmarksRef = useRef(null);
   const [isReady, setIsReady] = useState(false);
+  const [isPersonVisible, setIsPersonVisible] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined" || !videoRef.current) return;
@@ -30,8 +31,15 @@ export function usePose(videoRef) {
         });
 
         pose.onResults((results) => {
-          if (results.poseLandmarks) {
-            landmarksRef.current = results.poseLandmarks;
+          if (isMounted) {
+            if (results.poseLandmarks) {
+              landmarksRef.current = results.poseLandmarks;
+              // Check if both shoulders are visible with > 60% confidence
+              const visible = results.poseLandmarks[11]?.visibility > 0.6 && results.poseLandmarks[12]?.visibility > 0.6;
+              setIsPersonVisible(visible);
+            } else {
+              setIsPersonVisible(false);
+            }
           }
         });
 
@@ -64,5 +72,6 @@ export function usePose(videoRef) {
     };
   }, [videoRef]);
 
-  return { landmarksRef, isReady };
+  return { landmarksRef, isReady, isPersonVisible };
 }
+

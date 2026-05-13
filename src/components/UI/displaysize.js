@@ -32,14 +32,19 @@ export default function DisplaySize({ sizeChart, landmarksRef, measurements, isS
   if (!sizeChart || !isScanComplete) return null;
 
   return (
-    <div className="bg-white text-black p-6 rounded-[2.5rem] shadow-2xl flex flex-col items-center min-w-[140px] animate-in zoom-in-95 duration-500">
-      <h3 className="text-[10px] font-black text-zinc-400 uppercase tracking-[0.2em] mb-1">
-        Your Fit
+    <div className="bg-black/60 backdrop-blur-2xl p-6 rounded-[2rem] border border-white/10 flex flex-col items-center min-w-[140px] animate-in slide-in-from-right-4 duration-700 shadow-3xl">
+      <h3 className="text-[9px] font-black text-zinc-500 uppercase tracking-[0.2em] mb-1">
+        Recommendation
       </h3>
-      <div className="text-6xl font-black italic tracking-tighter leading-none">
+      <div className="text-5xl font-black italic tracking-tighter leading-none text-white">
         {recommendedSize}
       </div>
-      <p className="text-[10px] font-bold text-zinc-400 mt-2 uppercase tracking-widest">360° Volumetric</p>
+      <div className="flex items-center gap-1.5 mt-2 bg-green-500/10 px-2 py-0.5 rounded-full border border-green-500/20">
+         <div className="w-1 h-1 bg-green-500 rounded-full animate-pulse"></div>
+         <p className="text-[7px] font-black text-green-500 uppercase tracking-[0.2em]">98% Confidence</p>
+      </div>
     </div>
   );
 }
+
+
