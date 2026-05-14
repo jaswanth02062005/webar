@@ -47,8 +47,12 @@ export function useAnalysis() {
     const totalBodyPixels = visibleHeightPixels * 1.15;
     const pixelPerCm = totalBodyPixels / userHeightCm;
 
-    // 2. Measure Key Points
-    const getDist = (l1, l2) => {
+    // 2. Visibility & Confidence Check
+    const isFullBodyVisible = 
+      nose.visibility > 0.5 && 
+      leftFoot.visibility > 0.5 && 
+      rightFoot.visibility > 0.5 &&
+      leftFoot.y < 1.0 && rightFoot.y < 1.0; // Feet must be in frame
       const dx = (l1.x - l2.x);
       const dy = (l1.y - l2.y);
       return Math.sqrt(dx*dx + dy*dy) / pixelPerCm;
@@ -75,7 +79,8 @@ export function useAnalysis() {
       waist: Math.round(waistCirc),
       hips: Math.round(hipCirc),
       shoulders: Math.round(shoulderWidth),
-      pixelPerCm // Export for HUD drawing
+      pixelPerCm,
+      isFullBodyVisible
     };
   }, []);
 
