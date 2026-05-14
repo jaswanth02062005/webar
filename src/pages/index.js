@@ -39,10 +39,10 @@ export default function Home() {
             Volumetric AI Body Tracking
           </div>
           <h1 className="text-6xl md:text-[10rem] font-black tracking-[-0.06em] leading-[0.8] uppercase">
-            Fit is <br /> <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-800">Everything.</span>
+            Style <br /> <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-800">Intelligence.</span>
           </h1>
           <p className="text-zinc-500 text-base md:text-2xl max-w-2xl mx-auto font-medium leading-relaxed px-4">
-            The world's first universal AI fitting room. Scan your body first, then try on any garment from the web.
+            The future of personal styling. Scan your body, discover your measurements, and find your perfect color palette with AI.
           </p>
         </div>
 
@@ -66,9 +66,9 @@ export default function Home() {
         {/* Feature Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-16 pt-12 border-t border-white/5">
           {[
-            { t: "01. SCAN", d: "Capture your 3D body profile with 98.4% accuracy." },
-            { t: "02. CONNECT", d: "Paste a product link from Zara, Amazon, or Myntra." },
-            { t: "03. FIT", d: "Instant AI try-on with real-time size recommendation." }
+            { t: "01. CALIBRATE", d: "Set your height to establish a precise biometric baseline." },
+            { t: "02. SCAN", d: "High-fidelity AI capture of your unique body profile." },
+            { t: "03. ANALYZE", d: "Get exact dimensions and your personalized color palette." }
           ].map((f, i) => (
             <div key={i} className="text-left space-y-4 group">
               <h3 className="text-lg font-black italic tracking-tighter text-white/40 group-hover:text-white transition-colors">{f.t}</h3>

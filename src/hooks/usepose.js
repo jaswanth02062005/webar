@@ -72,6 +72,6 @@ export function usePose(videoRef) {
     };
   }, [videoRef]);
 
-  return { landmarksRef, isReady, isPersonVisible };
+  return { landmarksRef, isReady, isPersonVisible, videoRef };
 }
 
