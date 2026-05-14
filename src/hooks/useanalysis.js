@@ -38,7 +38,7 @@ export function useAnalysis() {
     const waistCirc = Math.PI * (3 * (waistWidth + waistDepth) / 2 - Math.sqrt((3 * waistWidth / 2 + waistDepth / 2) * (waistWidth / 2 + 3 * waistDepth / 2)));
 
     const hipsDepth = hipWidth / 1.25;
-    const hipCirc = Math.PI * (3 * (hipWidth + hipsDepth) / 2 - Math.sqrt((3 * hipWidth / 2 + hipsDepth / 2) * (hipWidth / 2 + 3 * hipCirc / 2)));
+    const hipCirc = Math.PI * (3 * (hipWidth + hipsDepth) / 2 - Math.sqrt((3 * hipWidth / 2 + hipsDepth / 2) * (hipWidth / 2 + 3 * hipsDepth / 2)));
 
     return {
       chest: Math.round(chestCirc),
